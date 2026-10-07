@@ -47,8 +47,9 @@ async function init(){
 
 /* Catálogo */
 $('#cats').innerHTML=['Todos',...CATS].map(c=>`<li><button data-c="${c}">${c}</button></li>`).join('');
-$('#cats').onclick=e=>{const c=e.target.dataset.c;if(!c)return;cat=c;$('#navwrap').classList.remove('open');render();};
-$('#burger').onclick=()=>$('#navwrap').classList.toggle('open');
+$('#cats').onclick=e=>{const c=e.target.dataset.c;if(!c)return;cat=c;setMenu(false);render();};
+const setMenu=o=>{$('#navwrap').classList.toggle('open',o);$('#burger').classList.toggle('open',o);$('#burger').setAttribute('aria-expanded',o);$('#burger').setAttribute('aria-label',o?'Fechar menu':'Abrir menu');};
+$('#burger').onclick=()=>setMenu(!$('#navwrap').classList.contains('open'));
 function render(){
  document.querySelectorAll('#cats button').forEach(b=>b.classList.toggle('on',b.dataset.c===cat));
  const list=cat==='Todos'?products:products.filter(p=>p.cat===cat);
