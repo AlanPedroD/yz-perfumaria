@@ -92,7 +92,9 @@ $('#checkout').onclick=()=>{
  const linhas=items.map((i,k)=>`*${k+1}. ${i.p.name}*\n${i.q} un. × ${brl(i.p.price)} = *${brl(i.p.price*i.q)}*`).join('\n\n');
  const linha='━━━━━━━━━━━━━━━';
  const msg=`✨ *NOVO PEDIDO • Aurea Perfumaria* ✨\n📅 ${data}\n\n${linha}\n🛍️ *ITENS DO PEDIDO*\n${linha}\n\n${linhas}\n\n${linha}\n💰 *TOTAL: ${brl(total)}*\n${linha}\n\nOlá! Gostaria de finalizar este pedido. Poderia me informar as formas de pagamento e de entrega? 😊`;
- window.open(wl+'?text='+encodeURIComponent(msg),'_blank');
+  window.open(wl+'?text='+encodeURIComponent(msg),'_blank');
+ cart={};saveCart();open(false);
+ toast('Pedido enviado! Continue a conversa pelo WhatsApp.');
 };
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2000);}
 
