@@ -84,10 +84,15 @@ function renderCart(){
 $('#items').onclick=e=>{const t=e.target.closest('button');if(!t||t.disabled)return;const d=t.dataset;
  if(d.p)cart[d.p]++;if(d.m&&cart[d.m]>1)cart[d.m]--;if(d.d)delete cart[d.d];saveCart();};
 $('#checkout').onclick=()=>{
- // Regra: itens excluídos pelo admin bloqueiam a finalização até serem removidos
- const lines=Object.keys(cart).map(id=>{const p=products.find(x=>x.id===id);return p&&`• ${cart[id]}x ${p.name} — ${brl(p.price*cart[id])}`;});
- if(lines.includes(undefined)||lines.includes(null))return toast('Remova os produtos indisponíveis.');
- window.open(wl+'?text='+encodeURIComponent('Olá! Quero finalizar meu pedido:\n'+lines.join('\n')+'\nTotal: '+$('#total').textContent),'_blank');
+ const items=Object.keys(cart).map(id=>({p:products.find(x=>x.id===id),q:cart[id]}));
+ if(!items.length||items.some(i=>!i.p))return toast('Remova os produtos indisponíveis.');
+ const n=new Date();
+ const data=n.toLocaleDateString('pt-BR')+' às '+n.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+ const total=items.reduce((s,i)=>s+i.p.price*i.q,0);
+ const linhas=items.map((i,k)=>`*${k+1}. ${i.p.name}*\n${i.q} un. × ${brl(i.p.price)} = *${brl(i.p.price*i.q)}*`).join('\n\n');
+ const linha='━━━━━━━━━━━━━━━';
+ const msg=`✨ *NOVO PEDIDO • Aurea Perfumaria* ✨\n📅 ${data}\n\n${linha}\n🛍️ *ITENS DO PEDIDO*\n${linha}\n\n${linhas}\n\n${linha}\n💰 *TOTAL: ${brl(total)}*\n${linha}\n\nOlá! Gostaria de finalizar este pedido. Poderia me informar as formas de pagamento e de entrega? 😊`;
+ window.open(wl+'?text='+encodeURIComponent(msg),'_blank');
 };
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2000);}
 
