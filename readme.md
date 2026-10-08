@@ -54,10 +54,14 @@ Para conectar ao seu próprio Firebase e Cloudinary, edite o objeto `CONFIG` no 
 ## Estrutura
 
 ```
+yz-perfumes/
+├── assets/
+│   ├── css/
+│   ├── images/
+│   └── js/
 ├── index.html
-├── style.css
-├── script.js
-└── README.md
+├── .gitignore
+└── readme.md
 ```
 
 ## Próximos passos
