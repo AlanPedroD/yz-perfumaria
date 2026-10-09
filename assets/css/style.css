@@ -97,7 +97,7 @@ footer a,footer span.l{display:block;color:#c6d9d5;font-size:.9rem;text-decorati
  #grid{grid-template-columns:repeat(2,1fr);gap:12px}
  .card .b{padding:12px;gap:4px}
  .card h3{font-size:1rem;line-height:1.25}
- .card p{font-size:.8rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+ .card p{font-size:.8rem;display:-webkit-box;line-clamp:3;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
  .pr{flex-wrap:wrap;gap:2px 8px}
  .pr b{font-size:1.05rem}
  .add{padding:10px 6px;font-size:.9rem}
