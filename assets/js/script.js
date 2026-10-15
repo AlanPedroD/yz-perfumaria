@@ -7,7 +7,7 @@ const CONFIG={
   appId:"1:196756915333:web:1805f52adebaa1ac8955ec"
  },
  cloudinary:{cloudName:"ddojjqwky",uploadPreset:"yz_perfumaria"},
- whatsapp:"5581986953009"
+ whatsapp:"5582996429077"
 };
 /* ======================================================= */
 const DEMO=!CONFIG.firebase.apiKey;
@@ -20,7 +20,7 @@ let products=[],cat='Todos',cart=JSON.parse(localStorage.getItem('cart')||'{}'),
 /* Relógio e contatos */
 const tick=()=>{const n=new Date();$('#cd').textContent=n.toLocaleDateString('pt-BR');$('#ch').textContent=n.toLocaleTimeString('pt-BR');};
 tick();setInterval(tick,1000);$('#yr').textContent=new Date().getFullYear();
-const wl='https://wa.me/'+CONFIG.whatsapp;$('#wa').href=wl+'?text='+encodeURIComponent('Olá! Gostaria de mais informações.');$('#wa2').href=wl;
+const wl='https://wa.me/'+CONFIG.whatsapp;$('#wa').href=wl+'?text='+encodeURIComponent('Olá! Gostaria de mais informações sobre a criação de catálogos virtuais.');$('#wa2').href=wl;
 
 /* Dados: Firebase (ou demonstração local sem configuração) */
 async function init(){
