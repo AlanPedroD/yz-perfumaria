@@ -61,7 +61,17 @@ function render(){
   <button class="add" data-id="${p.id}">Adicionar</button></div></article>`).join(''):'<p class="empty">Nenhum produto nesta categoria ainda.</p>';
  renderCart();renderAdminList();
 }
-$('#grid').onclick=e=>{const id=e.target.dataset.id;if(!id)return;cart[id]=(cart[id]||0)+1;saveCart();toast('Produto adicionado ao carrinho!');};
+
+$('#grid').onclick=e=>{
+ const img=e.target.closest('.im img');
+ if(img){$('#zoomImg').src=img.src;$('#zoomImg').alt=img.alt;$('#zoom').classList.add('open');return;}
+ const id=e.target.dataset.id;if(!id)return;
+ cart[id]=(cart[id]||0)+1;saveCart();toast('Produto adicionado ao carrinho!');
+};
+const closeZoom=()=>$('#zoom').classList.remove('open');
+$('#zoomClose').onclick=closeZoom;
+$('#zoom').onclick=e=>{if(e.target.id==='zoom')closeZoom();};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeZoom();});
 
 /* Carrinho */
 const save=()=>localStorage.setItem('cart',JSON.stringify(cart));
